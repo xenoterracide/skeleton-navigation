@@ -9,7 +9,7 @@ const generateConfig = easyWebpack.default;
 const get = easyWebpack.get;
 const path = require('path');
 const ENV = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() || 'development';
-let config;
+var config;
 
 // basic configuration:
 const title = 'Aurelia Navigation Skeleton';
@@ -59,12 +59,14 @@ const baseConfig = {
   entry: {
     'app': [/* this is filled by the aurelia-webpack-plugin */],
     'aurelia-bootstrap': coreBundles.bootstrap,
-    'aurelia': coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1)
+      'aurelia': coreBundles.aurelia.filter( function ( pkg ) {
+          return coreBundles.bootstrap.indexOf( pkg ) === -1
+      } )
   },
   output: {
-    path: outDir,
+    path: outDir
   }
-}
+};
 
 // advanced configuration:
 switch (ENV) {
